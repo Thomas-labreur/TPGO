@@ -1,0 +1,28 @@
+1. Installer go en décompressant le zip dans C:\Users\tlabreur\go\
+
+2. Créer le projet C:\Users\tlabreur\Workspace\Cours_Go
+
+3. Créer le fichier C:\Users\tlabreur\Workspace\Cours_Go\.vscode\settings.json
+```json
+{
+  "terminal.integrated.env.windows": {
+    "PATH": "C:\\Users\\<toi>\\tools\\go\\bin;${env:PATH}"
+  },
+  "go.goroot": "C:\\Users\\<toi>\\tools\\go"
+}
+```
+
+4. Installer les extensions go de vscode
+
+5. Initialiser un projet go (dans un sous dossier dédié)
+```bash
+go mod init tp1.go
+```
+Un fichier go.mod doit apparaitre
+
+6. Créer un programme (main.go)
+
+7. Lancer le programme
+```bash
+go.run
+```
