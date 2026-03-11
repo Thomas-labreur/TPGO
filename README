@@ -1,6 +1,8 @@
+Etapes pour installer et utiliser go:
+
 1. Installer go en décompressant le zip dans C:\Users\tlabreur\go\
 
-2. Créer le projet C:\Users\tlabreur\Workspace\Cours_Go
+2. Créer le projet C:\Users\tlabreur\Workspace\Cours_Go (ou cloner ce repo)
 
 3. Créer le fichier C:\Users\tlabreur\Workspace\Cours_Go\.vscode\settings.json
 ```json
@@ -20,9 +22,9 @@ go mod init tp1.go
 ```
 Un fichier go.mod doit apparaitre
 
-6. Créer un programme (main.go)
+6. Créer un programme (exemple.go)
 
 7. Lancer le programme
 ```bash
-go.run
+go.run exemple.go
 ```
