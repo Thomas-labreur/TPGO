@@ -48,7 +48,7 @@ func saisirNombre() int {
 
 	// Vérification
 	for err != nil || n <= 0 {
-		n_str = input("Entrer un nombre entier strictement positif:")
+		n_str = input("Nombre invalide! Entrer un nombre entier strictement positif:")
 		n, err = strconv.Atoi(n_str)
 	}
 
@@ -91,6 +91,20 @@ func calculerTTC(phts []float64, tva float64) []float64 {
 	}
 
 	return pttcs
+}
+
+// Sujet A et B (alternative)
+func calculerTotalTTC(phts []float64, tva float64) float64 {
+
+	// Initialise le total a 0
+	total := 0.0
+
+	// On parcours la liste des prix ht et ajoute le prix ttc au total
+	for _, pht := range phts {
+		total += pht * (1+tva/100)
+	}
+
+	return total
 }
 
 ////////////////////////////////////////////////////////////////////////
