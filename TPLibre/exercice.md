@@ -12,6 +12,8 @@ Dans tous les autres cas, une fois la saisie valide, il faut un **sous-programme
 
 Réfléchissons sur un exemple simple: WWBB devrait donc donner 2W2B. On rappelle que les chaines sont en fait des tranches de caractères (enfin d'octet, mais on peut les convertir en runes donc pas de pb). Comme toujours avec les tranches, il va falloir parcourir la tranche. Le premier caractère est 'W', puis 'W' puis 'B'. Il faudrait donc garder en mémoire le 1er caractère ('W') et parcourir la tranche **jusqu'a** tomber sur un autre caractère ('B'), en faisant augmenter un compteur. Quand on tombe sur un autre caractère, le compteur contient exactement le nombre 'W', ici 2. On peut concaténer le compteur (2) et le 1er caractère qu'on avait gardé ('W') au résultat (qu'on aurait donc prélablement intialisé comme une chaîne vide). Puis on ramène le compteur à 0 et on garde en mémoire le premier caractère suivant (ici 'B'), et on recommence **jusqu'a** être au bout de la chaîne.
 
+## Algorithme
+
 Ok c'est l'idée mais comment on le code. Ici je vois que je vais avoir besoin de **2 boucles** car j'ai utilisé 2 fois "jusqu'a". La premiere boucle ça sera un "jusqu'a être au bout de la chaine" et à l'intérieur je vais faire une autre boucle "jusqu'a tomber sur un caractère différent du 1er". 
 
 Dans la première je vais utiliser un indice i qui vaudra 0 au début et la condition de boucle sera i\<len(image). Avant de lancer la seconde, je dois garder dans une variable le caratère image[i]Dans la seconde, j'aurais un autre indice, compteur, qui va de 0 jusqu'a la recontre d'un caractere différent. Les deux indices augmentent a chaque étape de la seconde boucle.
