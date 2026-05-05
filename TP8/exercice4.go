@@ -31,27 +31,27 @@ type ligne_commande_produit struct {
 	prixProd float64
 }
 
-func selectLignes(prods []produit, lignes []ligne_commande, x int) []ligne_commande_produit {
+func select_liste_lignes( liste_produits []produit,  liste_lignes []ligne_commande, x int) []ligne_commande_produit {
 
-	// Select * -> on renvoie toutes les lignes de commandes, donc une liste
+	// Select * -> on renvoie toutes les  lignes de commandes, donc une liste
 	resultat := []ligne_commande_produit{}
 
 	// A chaque ligne, on parcours prod a la recherche du produit qui correspond
-	for _, ligne := range lignes {
+	for _, ligne := range  liste_lignes {
 
 		// On ajoute la condition ligne.numCommande==x, de cette façons si le numero
-		// de commande n'est pas le bon, on ne parcours meme pas prods, on évite donc
+		// de commande n'est pas le bon, on ne parcours meme pas liste_produits, on évite donc
 		// des instructions inutiles.
-		for i:=0 ; i<len(prods) && ligne.numCommande==x ; i++ {
+		for i:=0 ; i<len(liste_produits) && ligne.numCommande==x ; i++ {
 
 			// Si on trouve un produit correspondant, on doit créer l'objet ligne_commande_produit
-			if prods[i].numProd == ligne.numProd {
+			if liste_produits[i].numProd == ligne.numProd {
 				res := ligne_commande_produit{
 					numCommande: ligne.numCommande,
 					numProd: ligne.numProd,
 					quantite: ligne.quantite,
-					libelleProd: prods[i].libelleProd,
-					prixProd: prods[i].prixProd,
+					libelleProd: liste_produits[i].libelleProd,
+					prixProd: liste_produits[i].prixProd,
 				}
 				resultat = append(resultat, res)
 			}
@@ -63,14 +63,14 @@ func selectLignes(prods []produit, lignes []ligne_commande, x int) []ligne_comma
 func main() {
 
 	// Exemple de table Produits
-	produits := []produit{
+	liste_produits := []produit{
 		{0, "souris", 10.35},
 		{1, "ordinateur", 1200},
 		{2, "piles", 2.99},
 	}
 
 	// Exemple de table LigneCommandes
-	ligne_commandes := []ligne_commande{
+	liste_lignes := []ligne_commande{
 		{0, 0, 1},
 		{0, 0, 1},
 		{1, 0, 8},
@@ -80,11 +80,11 @@ func main() {
 		{4, 1, 1},
 	}
 
-	// Select * from lignes_commandes inner join produits using numProd where numCommande=x
+	// Select * from  lignes_commandes inner join produits using numProd where numCommande=x
 	x:=2
-	lignes := selectLignes(produits, ligne_commandes, x)
+	lignes_select := select_liste_lignes(liste_produits, liste_lignes, x)
 	fmt.Printf("Les produits commandés par la commande numero %v sont:\n", x)
-	for _, res := range lignes {
+	for _, res := range lignes_select {
 		fmt.Printf("%v\n", res)
 	}
 }

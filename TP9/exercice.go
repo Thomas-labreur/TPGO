@@ -106,23 +106,24 @@ func inputEtu() etudiant {
 	return etudiant
 }
 
-func etuToString(etudiant etudiant) string {
+// Version 1: on utilise les conversions vers string de strconv
+func etuToString(e etudiant) string {
 
 	// Conversion en string des éléments qui n'en sont pas
-	numero_str := strconv.Itoa(etudiant.numero)
-	code_str := strconv.Itoa(etudiant.adresse.codePostal)
-	adresse_str := etudiant.adresse.rue + ", " + code_str + " " + etudiant.adresse.ville
+	numero_str := strconv.Itoa(e.numero)
+	code_str := strconv.Itoa(e.adresse.codePostal)
+	adresse_str := e.adresse.rue + ", " + code_str + " " + e.adresse.ville
 
 	// Construction de la chaîne 
 	resultat := "Numero etudiant: " + numero_str + "\n"
-	resultat += "Nom: " + etudiant.nom + "\n"
-	resultat += "Prenom: " + etudiant.prenom + "\n"
+	resultat += "Nom: " + e.nom + "\n"
+	resultat += "Prenom: " + e.prenom + "\n"
 	resultat += "Adresse : " + adresse_str
 
 	// S'il y a des notes, on les ajoute a la chaîne une a une
-	if len(etudiant.notes) > 0 {
+	if len(e.notes) > 0 {
 		resultat += "\nNotes: "
-		for _, note := range etudiant.notes {
+		for _, note := range e.notes {
 			resultat += strconv.FormatFloat(note, 'f', -1, 64) + ", "
 		}
 		resultat = resultat[:len(resultat)-2] // enlever le dernier ", "
@@ -130,10 +131,31 @@ func etuToString(etudiant etudiant) string {
 	return resultat
 }
 
-func findEtu(numero int, etudiants []etudiant) (int, etudiant, error) {
+//  Version 2:  on utilise Sprintf
+// C'est comme Printf mais au lieu d'afficher le résultat
+// sur le terminal, on le stocke dans une variable
+func etuToString2(e etudiant) string {
+
+	resultat := fmt.Sprintf(
+	    "Numero etudiant: %v\nNom: %v\nPrenom: %v\nAdresse: %v, %v %v",
+	    e.numero, 
+	    e.nom, 
+	    e.prenom,
+	    e.adresse.rue,
+	    e.adresse.codePostal,
+	    e.adresse.ville)
+	    
+    if len(e.notes) > 0 {
+        resultat += fmt.Sprintf("\nNotes: %v", e.notes)
+    }
+    
+    return resultat
+}
+
+func findEtu(numero int, classe []etudiant) (int, etudiant, error) {
 
 	// Parcours de la liste et renvoi de l'étudiant
-	for i, etu := range etudiants {
+	for i, etu := range classe {
 		if etu.numero == numero {
 			return i, etu, nil
 		}
@@ -143,14 +165,14 @@ func findEtu(numero int, etudiants []etudiant) (int, etudiant, error) {
 	return -1, etudiant{}, fmt.Errorf("étudiant avec le numéro %d introuvable", numero)
 }
 
-func ajoutNote(etudiants []etudiant, num int, note float64) error {
+func ajoutNote(classe []etudiant, num int, note float64) error {
 	
 	// On cherche l'étudiant dans la liste
-	i, etu, err := findEtu(num, etudiants)
+	i, etu, err := findEtu(num, classe)
 
 	// S'il exite on saisit une note
 	if err==nil {
-		etudiants[i].notes = append(etu.notes, note)
+		classe[i].notes = append(etu.notes, note)
 	}
 
 	// Dans tous les cas, on renvoie l'erreur
@@ -193,9 +215,9 @@ func main() {
 
 	// 1. Saisie des étudiants
 	fmt.Println("SAISIE DES ETUDIANTS\n")
-	etudiants := make([]etudiant, 2)
-	for i, _ := range etudiants {
-		etudiants[i] = inputEtu()
+	classe := make([]etudiant, 2)
+	for i, _ := range classe {
+		classe[i] = inputEtu()
 		fmt.Println("\n")
 	}
 	
@@ -204,23 +226,23 @@ func main() {
 	fmt.Println("Saisir -1 comme numero etudiant pour stopper la notation.\n")
 
 	// On saisit un numero
-    num = saisirNumEtu(etudiants)
+    num = saisirNumEtu(classe)
 
 	// Tant que ce numero n'est pas -1, on rentre des notes
 	for num != -1 {
 		nb_notes = saisirNbNotes()
 		for i:=0; i<nb_notes; i++ {
 			note = saisirNote()
-			ajoutNote(etudiants, num, note)
+			ajoutNote(classe, num, note)
 			fmt.Println("Note enregistrée.\n")
 		}
-		num = saisirNumEtu(etudiants)
+		num = saisirNumEtu(classe)
 	}
 	
 	// 3. Affichage de la liste des étudiants
 	fmt.Println("\nLISTE DES ETUDIANTS\n")
-	for _, etu := range etudiants {
-		fmt.Println(etuToString(etu))
+	for _, etu := range classe {
+		fmt.Println(etuToString2(etu))
 
 		// Gestion de la moyenne
 		moyenne, err := moyEtu(etu)

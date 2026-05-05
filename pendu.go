@@ -35,7 +35,7 @@ func demander_rune() rune {
 		str = input("Saisie invalide. Proposez une lettre: ")
 		r = []rune(str)
 	}
-	return r[0]
+	return lower(r[0])
 }
 
 // Genere aléatoirement un mot dans une liste prédéfinie de ~200 mots

@@ -22,28 +22,28 @@ type commande struct{
 	dateCommande string
 }
 
-func selectLibelleProd(prods []produit) []string {
+func selectLibelleProd(liste_produits []produit) []string {
 
 	// Initialiser une liste vide de string
-	libelle_prods := make([]string, len(prods))
+	liste_libelles := make([]string, len(liste_produits))
 
 	// On la remplit avec les libelles des produits
-	for i, prod := range prods {
-		libelle_prods[i] = prod.libelleProd
+	for i, prod := range liste_produits {
+		liste_libelles[i] = prod.libelleProd
 	}
 
-	return libelle_prods
+	return liste_libelles
 }
 
 func main() {
 
 	// Exemple de table Produits
-	produits := []produit{
+	liste_produits := []produit{
 		{0, "souris", 10.35},
 		{1, "ordinateur", 1200},
 		{2, "piles", 2.99},
 	}
 
 	// Select libelleProd from produits
-	fmt.Printf("\nLes libellés des produits sont %v", selectLibelleProd(produits))
+	fmt.Printf("\nLes libellés des produits sont %v", selectLibelleProd(liste_produits))
 }

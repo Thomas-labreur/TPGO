@@ -24,23 +24,30 @@ type commande struct{
 
 // La table Produits peut être modélisée par un liste de produits []produit
 
-func afficherProduits(prods []produit) {
+func afficherProduits(liste_produits []produit) {
 
 	// On affiche le nom et le prix de chaque produits
-	for _, prod := range prods {
-		fmt.Printf("%v (%v euros)\n", prod.libelleProd, prod.prixProd)
+	for _, p := range  liste_produits {
+		fmt.Printf("%v (%v euros)\n", p.libelleProd, p.prixProd)
 	}
+
+	// ATTENTION de bien faire la différence entre ces 3 éléments:
+	// produit est un type 
+	// liste_produits est une variable du type liste de produit
+	// p est un élément de cette liste, c'est donc une variable du type produit
 }
 
 func main() {
 
+
 	// Exemple de table Produits
-	produits := []produit{
+	liste_produits := []produit{
 		{0, "souris", 10.35},
 		{1, "ordinateur", 1200},
 		{2, "piles", 2.99},
 	}
 
 	// Affichage
-	afficherProduits(produits)
+	afficherProduits(liste_produits)
 }
+

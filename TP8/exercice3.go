@@ -23,12 +23,12 @@ type commande struct{
 }
 
 
-func selectLibelleProd2(prods []produit, x int) (string, error) {
+func selectLibelleProd2(liste_produits []produit, x int) (string, error) {
 	
 	// On parcours la liste, et on renvoie le libellé si le numProd correspond
-	for _, prod := range prods {
-		if prod.numProd == x {
-			return prod.libelleProd, nil
+	for _, p := range liste_produits {
+		if p.numProd == x {
+			return p.libelleProd, nil
 		}
 	}
 
@@ -39,15 +39,15 @@ func selectLibelleProd2(prods []produit, x int) (string, error) {
 func main() {
 
 	// Exemple de table Produits
-	produits := []produit{
-		{0, "souris", 10.35},
-		{1, "ordinateur", 1200},
-		{2, "piles", 2.99},
+	liste_produits := []produit{
+		{23, "souris", 10.35},
+		{34, "ordinateur", 1200},
+		{21, "piles", 2.99},
 	}
 
     // Select libelleProd from produits where numProd=x
-	x := 2
-	libelle, err := selectLibelleProd2(produits, x)
+	x := 34
+	libelle, err := selectLibelleProd2(liste_produits, x)
 	if err==nil {
 		fmt.Printf("Le libellé du produit numero %v est '%v'.\n", x, libelle)
 	} else {

@@ -19,7 +19,7 @@ Ok c'est l'idée mais comment on le code. Ici je vois que je vais avoir besoin d
 Dans la première je vais utiliser un indice i qui vaudra 0 au début et la condition de boucle sera i\<len(image). Avant de lancer la seconde, je dois garder dans une variable le caratère image[i]Dans la seconde, j'aurais un autre indice, compteur, qui va de 0 jusqu'a la recontre d'un caractere différent. Les deux indices augmentent a chaque étape de la seconde boucle.
 
 Etapes:
-- CONVERTIR image EN TYPE []rune
+- CONVERTIR image EN imag TYPE []rune
 - DECLARER resultat (string), i, compte (int), premier_caractere (rune)
 - AFFECTER "" A resultat, 0 A i, 0 a compte
 - TANT QUE i \< len(image)
@@ -29,7 +29,7 @@ Etapes:
         - INCREMENTER compte
     - FIN TANT QUE
     - CONVERTIR compte ET premier_caracter EN TYPE string
-    - AFFECTER resultat + compte + premier_caracter
+    - AFFECTER resultat + compte + premier_caracter A resultat
     - AFFECTER 0 A compte
 - FIN TANT QUE
 - RENVOYER resultat

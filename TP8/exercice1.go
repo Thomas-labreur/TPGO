@@ -24,33 +24,33 @@ type commande struct{
 
 // La table Produits peut être modélisée par un liste de produits []produit
 
-func afficherProduits(prods []produit) {
+func afficherProduits(liste_produits []produit) {
 
 	// On affiche le nom et le prix de chaque produits
-	for _, prod := range prods {
-		fmt.Printf("%v (%v euros)\n", prod.libelleProd, prod.prixProd)
+	for _, p := range prods {
+		fmt.Printf("%v (%v euros)\n", p.libelleProd, p.prixProd)
 	}
 }
 
-func compterProduits(prods []produit) int {
+func compterProduits(liste_produits []produit) int {
 
 	// On renvoie juste la longueur de la liste
-	return len(prods)
+	return len(liste_produits)
 }
 
 func main() {
 
 	// Exemple de table Produits
-	produits := []produit{
+	liste_produits := []produit{
 		{0, "souris", 10.35},
 		{1, "ordinateur", 1200},
 		{2, "piles", 2.99},
 	}
 
 	// Affichage
-	afficherProduits(produits)
+	afficherProduits(liste_produits)
 	
 	// Comptage des produits
-	count := compterProduits(produits)
+	count := compterProduits(liste_produits)
 	fmt.Printf("\nIl y a %v produits.\n", count)
 }
